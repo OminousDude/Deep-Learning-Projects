@@ -1,0 +1,30 @@
+Map generation: https://github.com/mikonvergence/DiffusionFastForward
+Text + Good Results + Multpiple noise functions: https://github.com/ozanciga/diffusion-for-beginners/tree/main
+Img to Img: https://github.com/azad-academy/personalized-diffusion
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+DDPM:
+    alpha_t = np.take(alpha, t)
+    alpha_t_bar = np.take(alpha_bar, t)
+
+    mean = (1 / (alpha_t ** 0.5)) * (
+        x_t - (1 - alpha_t) / (1 - alpha_t_bar) ** 0.5 * pred_noise
+    )
+
+    sigma = np.take(beta, t) ** 0.5
+    z = np.random.normal(size=x_t.shape)
+    return mean + sigma * z
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+DDIM:
+    alpha_t_bar = np.reshape(np.take(alpha_bar, t), [-1, 1, 1, 1])
+    alpha_t_minus_one = np.reshape(np.take(alpha_bar, t-step_size), [-1, 1, 1, 1])
+    
+    signal = (x_t - ((1 - alpha_t_bar) ** 0.5) * pred_noise)/ (alpha_t_bar ** 0.5)
+    signal_rate = (alpha_t_minus_one ** 0.5) 
+    
+    noise_rate = (1 - alpha_t_minus_one) ** 0.5
+    return signal * signal_rate + pred_noise * noise_rate
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Interesting code with good results but in TensorFlow: https://github.com/Yukino1010/Diffusion_Model/blob/master/diffusion.ipynb
+Paper of the code: https://medium.com/mlearning-ai/understanding-the-diffusion-model-and-the-theory-tensorflow-cafcd5752b98
+-------------------------------------------------------------------------------------------------------------------------------------------------------
