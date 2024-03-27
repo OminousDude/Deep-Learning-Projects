@@ -1,0 +1,4 @@
+model compile
+
+lightning
+    performance tables = 16 bit 
