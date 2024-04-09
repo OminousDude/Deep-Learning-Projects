@@ -1,7 +1,0 @@
-Token number (T) = 30k. This is no:of distinct tokens, derived from WordPiece tokenization. This breaks down single words to component words, to improve coverage. Ex: playing is converted to (play ,##ing). So as long as the model knows the word “sleep”, it can infer the meaning of “sleeping” even if it is seeing the word for first time
-head_num (A) = 12. Total 12 attention heads per Transformer layer
-Transformer num (L) = 12
-embed_dim (H) = Embedding length = 768
-Feed forward Dim (FFD) = H*4 =3072
-seq_len (S)= Max no:of tokens that can be in an input sentence = 512
-pos_num (P) = Positions to be encoded = S = 512
